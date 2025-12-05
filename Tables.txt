@@ -1,0 +1,54 @@
+                ** Creating Database **
+CREATE DATABASE ecommerce;
+
+use ecommerce;
+
+                    ** Creating Tables **
+CREATE TABLE customers (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+email VARCHAR(100) UNIQUE,
+address VARCHAR(255)
+);
+
+CREATE TABLE orders(
+id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT,
+order_date DATE,
+totalAmount DECIMAL(10,2),
+FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE products(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+price DECIMAL(10,2),
+description TEXT
+);
+
+                        ** Inserting Values into Tables **
+INSERT INTO customers (name,email,address) VALUES 
+('Alice','alice@gamil.com','123 Mian st'),
+('Bob', 'bob@gmail.com', '456 oak st'),
+('John','john@gmail.com','124 Nehru st'),
+('Zen','zen@gmail.com','987 Hustle'),
+('charlie','charlie@gmail.com','789 prime st');
+
+INSERT INTO products (name,price,description) VALUES 
+('Product A',25.00,'Product A description'),
+('Product B',35.00,'Product B description'),
+('Product C',40.00,'Product C description'),
+('Product D',45.00,'Product D description'),
+('Product E',50.00,'Product E description');
+
+INSERT INTO orders (customer_id, order_date, totalAmount) VALUES
+(1, curdate(), 100.00),
+(2, curdate()-INTERVAL 10 day, 200.00),
+(3, curdate()-INTERVAL 20 day, 250.00),
+(2, curdate()-INTERVAL 30 day, 300.00),
+(1,curdate()-interval 40 day , 150.00);
+
+                    ** Showing Values in Tables **
+SELECT * from customers;
+SELECT * FROM orders;
+SELECT * FROM products;
